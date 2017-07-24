@@ -3,11 +3,11 @@
     <vote-btn msg="活动首页" v-on:btnClickEvent='btnClickEvent'></vote-btn><br>
     <form @submit.prevent>
 
-      <input type="text" placeholder="* 名称(15字以内)" v-model='user.name'><br>
-    <input type="text" placeholder="简介(30字以内)" v-model='user.desc'><br>
-    <span>* 上传图片(最多上传三张，第一张为封面)</span><br>
-    <vote-upload ref="upload"></vote-upload>
-    <vote-btn msg='提交' v-on:btnClickEvent='submit'></vote-btn>
+      <input type="text" placeholder="* 名称(15字以内)" v-model='user.signName'><br>
+      <input type="text" placeholder="简介(30字以内)" v-model='user.signDesc'><br>
+      <span>* 上传图片(最多上传三张，第一张为封面)</span><br>
+      <vote-upload ref="upload"></vote-upload>
+      <vote-btn msg='提交' v-on:btnClickEvent='submit'></vote-btn>
 
     </form>
 
@@ -23,9 +23,11 @@
     data() {
       return {
         user: {
-          name: '',
-          desc: '',
-          image: ''
+          signNo: 0,
+          signName: '',
+          signDesc: '',
+          signImgUrl: '',
+          isDelete: false
         }
       }
     },
@@ -39,12 +41,10 @@
       },
       submit:function(){
         // console.log(this.$refs.upload.data);
-        // this.user.image=this.$refs.upload.data
-        console.log(this.user);
-        console.log(this.user.name);
-        console.log(this.user.desc);
+        this.user.signImgUrl=this.$refs.upload.data
+        this.user.signNo++;
         var formData = JSON.stringify(this.user);
-        console.log(formData);
+        // console.log(formData);
         // alert('submit')
         this.$http({
           method: 'post',
