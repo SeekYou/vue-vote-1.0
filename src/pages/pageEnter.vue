@@ -25,7 +25,7 @@
         user: {
           name: '',
           desc: '',
-          image: $refs.upload.data
+          image: ''
         }
       }
     },
@@ -39,10 +39,26 @@
       },
       submit:function(){
         // console.log(this.$refs.upload.data);
-        console.log(user);
+        // this.user.image=this.$refs.upload.data
+        console.log(this.user);
         console.log(this.user.name);
         console.log(this.user.desc);
-        alert('submit')
+        var formData = JSON.stringify(this.user);
+        console.log(formData);
+        // alert('submit')
+        this.$http({
+          method: 'post',
+          url: 'http://localhost:3000/new_post',
+          data: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }).then(function(res){
+          console.log(res);
+        }).catch(function(err){
+          console.log(err);
+        })
       }
     }
   }
