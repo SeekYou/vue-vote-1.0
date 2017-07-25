@@ -5,9 +5,10 @@ import App from './App'
 import router from './router'
 import normalize from 'normalize.css/normalize.css'
 import axios from 'axios'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.prototype.$http = axios
-
+Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
