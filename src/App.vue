@@ -21,4 +21,5 @@ export default {
   margin-top: 60px;
 }*/
 @import './assets/css/App.css'
+
 </style>

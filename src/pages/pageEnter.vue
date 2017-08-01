@@ -1,16 +1,29 @@
 <template>
   <div id="pageEnter">
-    <vote-btn msg="活动首页" v-on:btnClickEvent='btnClickEvent'></vote-btn><br>
-    <form @submit.prevent>
+    <div class="top clearfix">
+      <router-link to="/">
+      <!-- <vote-btn class="introduce" msg="活动首页" v-on:btnClickEvent='btnClickEvent'></vote-btn> -->
+      <vote-btn class="introduce" msg="活动首页"></vote-btn>
+      </router-link>
+    </div>
+    <div class="enterBox">
+      <form @submit.prevent>
+        <p>
+          <input type="text" class="title" placeholder="* 名称(15字以内)" v-model  ='user.signName'>
+        </p>
+        <p>
+          <textarea class="desc" placeholder="简介(30字以内)" v-model='user.signDesc' />
+        </p>
 
-      <input type="text" placeholder="* 名称(15字以内)" v-model='user.signName'><br>
-      <input type="text" placeholder="简介(30字以内)" v-model='user.signDesc'><br>
-      <span>* 上传图片(最多上传三张，第一张为封面)</span><br>
-      <vote-upload ref="upload"></vote-upload>
-      <vote-btn msg='提交' v-on:btnClickEvent='submit'></vote-btn>
+        <span class="files_tip">* 上传图片(最多上传三张，第一张为封面)</span>
+        <div class="demo">
+          <vote-upload ref="upload"></vote-upload>
+        </div>
 
-    </form>
+        <vote-btn msg='提交' class="sub_btn" v-on:btnClickEvent='submit'></vote-btn>
 
+      </form>
+    </div>
   </div>
 </template>
 
@@ -28,7 +41,8 @@
           signDesc: '',
           signImgUrl: '',
           isDelete: false
-        }
+        },
+        userId: null
       }
     },
     components: {
@@ -54,12 +68,122 @@
             'X-Requested-With': 'XMLHttpRequest',
             'Content-Type': 'application/json;charset=utf-8'
           }
-        }).then(function(res){
-          console.log(res);
-        }).catch(function(err){
+        })
+        // .then(function(res){
+        //   console.log(res);
+        //   console.log(res.data._id);
+        //   console.log(this); //获取不到this，改用箭头函数试试
+        // }).catch(function(err){
+        //   console.log(err);
+        // })
+        .then((res) => {
+          console.log(this);
+          // console.log(res.data._id);
+          this.userId=res.data._id;
+          // console.log(this.userId);
+          this.$router.push({name:'datail',query: { userId: this.userId}})
+        })
+        .catch((err) => {
           console.log(err);
         })
+        console.log(this.userId);
+        // this.$router.push({name: 'detail'})
+
       }
     }
   }
 </script>
+
+<style scoped>
+  #pageEnter {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
+  .top{
+    width: 100%;
+    padding: 0.22rem 0.24rem 0;
+    box-sizing: border-box;
+    /*position: absolute;*/
+  }
+  .clearfix {
+    zoom: 1;
+  }
+  .clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  .introduce {
+        float: right;
+    width: 1.32rem;
+    height: 0.5rem;
+    /*line-height: 0.5rem;*/
+    background: #fe6f95;
+    font-size: 0.24rem;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 0.08rem;
+  }
+  .enterBox {
+    padding: 0 0.24rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .enterBox p {
+    width: 100%;
+    position: relative;
+    margin: 0.26rem 0 0;
+  }
+
+  input[placeholder] {
+    color: #666;
+  }
+  .title {
+    width: 100%;
+    height: 0.66rem;
+    line-height: 0.66rem;
+    border: 1px solid #999999;
+    color: #333;
+    padding-left: 0.26rem;
+    font-size: 0.3rem;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  .desc {
+    width: 100%;
+    height: 1.3rem;
+    font-size: 0.3rem;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #999999;
+    color: #333;
+    padding-left: 0.3rem;
+    line-height: 0.66rem;
+    resize: none;
+  }
+  .files_tip {
+        display: block;
+    font-size: 0.3rem;
+    color: #999999;
+    margin: 0.56rem 0 0.2rem;
+        text-align: start;
+    text-indent: 0.26rem;
+  }
+  .sub_btn {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.3rem;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 0.26rem;
+    background: #ED4747;
+    border: none;
+    border-radius: 4px;
+  }
+</style>

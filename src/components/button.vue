@@ -1,6 +1,7 @@
 <template>
   <button class="vote-btn" @click="btnClickEvent">
-    <span>{{msg}}</span>
+    <!-- <span>{{msg}}</span> -->
+    {{msg}}
   </button>
 </template>
 
@@ -19,3 +20,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

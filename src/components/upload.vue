@@ -1,8 +1,8 @@
 <template>
   <div class="imgFile">
     <img v-if="data!=''" v-bind:src="data">
-  <input type="file" title="" v-bind:id="name" v-on:change="pushImg($event)">
-  <span v-if="data!=''" @click="delImg($event)">删除</span>
+    <input type="file" title="" v-bind:id="name" v-on:change="pushImg($event)">
+    <span v-if="data!=''" @click="delImg($event)"></span>
   </div>
 </template>
 
@@ -56,3 +56,73 @@
     }
   }
 </script>
+
+<style scoped>
+  .imgFile {
+    /*margin-right: 0.14rem;
+    float: left;
+    position: relative;
+*/
+
+ position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: 0 10px;
+  border: 1px solid #000;
+}
+
+img{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+    height: 100%;
+}
+span{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -10px;
+  z-index: 3;
+  background: url(../assets/images/closeimg.png) no-repeat scroll 0 0 transparent;
+  background-size: cover;
+}
+a {
+  color: #42b983;
+}
+input{
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /*opacity: 0;*/
+  /*border: 1px solid #eee;*/
+  /*background: rgba(0,0,0,0);*/
+  /*background-color: transparent;*/
+  background: url(../assets/images/addimg.jpg) no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+}
+input::-webkit-file-upload-button,button {
+  display: none;
+}
+
+/*.tips{
+  position: absolute;
+    top: 30%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background: #ddd;
+  display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #aaa;
+    text-align: center;
+    line-height: 100px;
+}*/
+</style>

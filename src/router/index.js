@@ -16,17 +16,17 @@ export default new Router({
     },
     {
     	path:'/enter',
-    	name:'btn',
+    	name:'enter',
     	component:pageEnter
     },
     {
     	path:'/index',
-    	name:'list',
+    	name:'indexList',
     	component:pageIndex
     },
     {
         path:'/detail',
-        name:'nav',
+        name:'datail',
         component:pageDetail
     }
   ]
